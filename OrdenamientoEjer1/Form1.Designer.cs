@@ -33,7 +33,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
-            this.TxtDatos = new System.Windows.Forms.TextBox();
+            this.txtDatos = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,6 +45,7 @@
             this.btnAgregar.TabIndex = 0;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnOrdenar
             // 
@@ -87,19 +88,20 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Simulación Método Ordenamiento Datos";
             // 
-            // TxtDatos
+            // txtDatos
             // 
-            this.TxtDatos.Location = new System.Drawing.Point(126, 177);
-            this.TxtDatos.Name = "TxtDatos";
-            this.TxtDatos.Size = new System.Drawing.Size(300, 55);
-            this.TxtDatos.TabIndex = 4;
+            this.txtDatos.Location = new System.Drawing.Point(126, 177);
+            this.txtDatos.Name = "txtDatos";
+            this.txtDatos.Size = new System.Drawing.Size(300, 55);
+            this.txtDatos.TabIndex = 4;
+            this.txtDatos.TextChanged += new System.EventHandler(this.TxtDatos_TextChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(20F, 48F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1262, 639);
-            this.Controls.Add(this.TxtDatos);
+            this.Controls.Add(this.txtDatos);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnOrdenar);
@@ -119,6 +121,6 @@
         private TabControl tabControl1;
         private TabPage tabPage1;
         private Label label1;
-        private TextBox TxtDatos;
+        private TextBox txtDatos;
     }
 }

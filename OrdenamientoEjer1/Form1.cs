@@ -35,8 +35,8 @@ namespace OrdenamientoEjer1
                 arreglo_botones[0] = new Button();
                 arreglo_botones[0].Width = 40;          //Definir ancho
                 arreglo_botones[0].Height = 40;         //Definir Alto
-                arreglo_botones[0].BackColor = Color.Crimson; //Definir color del botón
-                arreglo_botones[0].Text = a.ToString();
+                arreglo_botones[0].BackColor = Color.Blue; //Definir color del botón
+                arreglo_botones[0].Text = a;
                 Calcular_Longitud();
             }
             public void Calcular_Longitud()             //Método para saber cuantos datos se van a ordenar
@@ -58,7 +58,7 @@ namespace OrdenamientoEjer1
                 Array.Resize<Button>(ref arreglo_botones, longitud + 1);
                 arreglo[longitud] = dato;
                 arreglo_botones[longitud] = new Button();
-                arreglo_botones[0].Width = 50;          //Definir ancho
+                arreglo_botones[0].Width = 90;          //Definir ancho
                 arreglo_botones[0].Height = 50;         //Definir Alto
                 arreglo_botones[0].BackColor = Color.GreenYellow; //Definir color del botón
                 arreglo_botones[0].Text = dato;
@@ -79,8 +79,9 @@ namespace OrdenamientoEjer1
             {
                 for (int j = 0; j < arreglo.Length - 1; j++)
                 {
-                    char palabra = Convert.ToChar(arreglo[i]);
-                    if (palabra == letraAbecedario[i])
+                    char[] palabra;
+                    palabra = arreglo[i].ToCharArray();
+                    if (palabra[0] == letraAbecedario[i])
                     {
                         Intercambio(ref Arreglo_Datos, j + 1, j);
                         string aux = arreglo[j];

@@ -108,7 +108,7 @@
             this.Controls.Add(this.btnOrdenar);
             this.Controls.Add(this.btnAgregar);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Método Ordenamiento Ejercicio 1";
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

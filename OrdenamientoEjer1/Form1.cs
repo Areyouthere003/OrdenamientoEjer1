@@ -25,17 +25,17 @@ namespace OrdenamientoEjer1
         class Datos
         {
             private int longitud;           //Cantidad de datos a ordenar
-            private int[] arreglo = new int[1];
+            private string[] arreglo = new string[1];
             private Button[] arreglo_botones = new Button[1]; //nuevo arreglo de botones
 
             public Datos() //constructor clase 
             {
-                int a = 0;      //Variable auxiliar
+                string a = "";      //Variable auxiliar
                 arreglo[0] = a; //texto que desplegará el botón
                 arreglo_botones[0] = new Button();
                 arreglo_botones[0].Width = 40;          //Definir ancho
                 arreglo_botones[0].Height = 40;         //Definir Alto
-                arreglo_botones[0].BackColor = Color.GreenYellow; //Definir color del botón
+                arreglo_botones[0].BackColor = Color.Crimson; //Definir color del botón
                 arreglo_botones[0].Text = a.ToString();
                 Calcular_Longitud();
             }
@@ -47,13 +47,13 @@ namespace OrdenamientoEjer1
             {
                 return longitud;
             }
-            public int[] Obtener_Arreglo()
+            public string[] Obtener_Arreglo()
             {
                 return arreglo;
             }
-            public void Insertar_Dato(int dato) //Función para insertar valor digitado por usuario como texto en botón
+            public void Insertar_Dato(string dato) //Función para insertar texto digitado por usuario como texto en botón
             {
-                Array.Resize<int>(ref arreglo, longitud + 1); //se incrementará el arreglo en 1
+                Array.Resize<string>(ref arreglo, longitud + 1); //se incrementará el arreglo en 1
                 arreglo[longitud] = dato;
                 Array.Resize<Button>(ref arreglo_botones, longitud + 1);
                 arreglo[longitud] = dato;
@@ -61,7 +61,7 @@ namespace OrdenamientoEjer1
                 arreglo_botones[0].Width = 50;          //Definir ancho
                 arreglo_botones[0].Height = 50;         //Definir Alto
                 arreglo_botones[0].BackColor = Color.GreenYellow; //Definir color del botón
-                arreglo_botones[0].Text = dato.ToString();
+                arreglo_botones[0].Text = dato;
                 Calcular_Longitud();
             }
 
@@ -70,18 +70,20 @@ namespace OrdenamientoEjer1
                 return arreglo_botones;
             }
         }
-            Datos Informacion = new Datos();      //Instanciamos la clase datos
-        public void BubbleSort(ref int[] arreglo, ref Button[] Arreglo_Datos)
+        Datos Informacion = new Datos();      //Instanciamos la clase datos
+        private char[] letraAbecedario = new char[] { 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f' };
+
+        public void BubbleSort(ref string[] arreglo, ref Button[] Arreglo_Datos)
         {
             for (int i = 0; i < arreglo.Length; i++)
             {
                 for (int j = 0; j < arreglo.Length - 1; j++)
                 {
-                    //Intercambio(ref Arreglo_Datos, j + 1, j);
-                    if (arreglo[i] == arreglo[j + 1])
+                    char palabra = Convert.ToChar(arreglo[i]);
+                    if (palabra == letraAbecedario[i])
                     {
                         Intercambio(ref Arreglo_Datos, j + 1, j);
-                        int aux = arreglo[j];
+                        string aux = arreglo[j];
                         arreglo[j] = arreglo[j + 1];
                         arreglo[j + 1] = aux;
                     }
@@ -153,6 +155,63 @@ namespace OrdenamientoEjer1
             }
             estado = true; //Cambia el valor de variable de control de simulación
             tabPage1.Refresh();
+        }
+
+        private void tabPage1_Paint(object sender, PaintEventArgs e)
+        {
+            if (estado)
+            {
+                Point xy = new Point(50, 70);   //método de librería Drawing
+                try
+                {
+                    Dibujar_Arreglo(ref Arreglo, xy, ref tabPage1);
+                    //Función que dibujará los datos en la simulación
+                }
+                catch
+                { }
+                estado = false;
+            }
+        }
+        public void Dibujar_Arreglo(ref Button[] Arreglo, Point xy, ref TabPage t)
+        {
+            for (int i = 1; i < Arreglo.Length; i++)
+            {
+                Arreglo[i].Location = xy;
+                t.Controls.Add(Arreglo[i]);
+                xy += new Size(70, 0);
+            }
+        }
+
+        private void btnOrdenar_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;   //Cambiamos la apariencia del cursor a modo espera
+
+            btnOrdenar.Enabled = false;
+            txtDatos.Enabled = false;
+            btnAgregar.Enabled = false;
+
+            BubbleSort(ref Arreglos_datos, ref Arreglo);
+
+            this.Cursor = Cursors.Default;  //retorna la apariencia del cursor a uno por defecto
+
+            btnOrdenar.Enabled = true;
+            txtDatos.Enabled = true;
+            btnAgregar.Enabled = true;
+        }
+
+        static void Ordenamiento_Insercion(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                int temp = array[i];
+                int j = i - 1;
+                while ((j >= 0) && (array[j] > temp))
+                {
+                    array[j + 1] = array[j];
+                    j--;
+                }
+                array[j + 1] = temp;
+            }
         }
     }
 }

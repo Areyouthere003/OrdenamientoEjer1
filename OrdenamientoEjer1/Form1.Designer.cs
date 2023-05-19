@@ -53,8 +53,9 @@
             this.btnOrdenar.Name = "btnOrdenar";
             this.btnOrdenar.Size = new System.Drawing.Size(225, 69);
             this.btnOrdenar.TabIndex = 1;
-            this.btnOrdenar.Text = "button2";
+            this.btnOrdenar.Text = "Ordenar";
             this.btnOrdenar.UseVisualStyleBackColor = true;
+            this.btnOrdenar.Click += new System.EventHandler(this.btnOrdenar_Click);
             // 
             // tabControl1
             // 
